@@ -1,7 +1,9 @@
 import enemies.Enemy;
+import items.Item;
 import players.Player;
-
+import items.ItemManager;
 import java.util.List;
+import java.util.Scanner;
 
 public class FightManager {
     private int round = 1;
@@ -31,7 +33,15 @@ public class FightManager {
         return false;
     }
 
-    public boolean startFight(Player player, List<Enemy> enemies){
+    public boolean startFight(Scanner scanner, Player player, List<Enemy> enemies, ItemManager itemManager){
+
+        int playerHealth = player.getChosenHero().getHealth();
+        int playerAttack = player.getChosenHero().getHealth();
+        int playerDefense = player.getChosenHero().getDefense();
+
+        player.showBackpack();
+        Item randomCloseWeapon = itemManager.chooseItemReward(scanner, player);
+
 
 
 

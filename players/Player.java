@@ -10,9 +10,9 @@ public class Player {
     Hero chosenHero;
     private List<Item> backpack = new ArrayList<>();
 
-
     public Player(Hero chosenHero) {
         this.chosenHero = chosenHero;
+
     }
 
 

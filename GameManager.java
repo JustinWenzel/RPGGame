@@ -24,6 +24,9 @@ public class GameManager {
             Player player1 = new Player(chosenHero);
 
 
+
+
+
             //Item randomWeapon = itemManagerForGame.getRandomWeapon(player1);
            // player1.getBackpack().add(randomWeapon);
 
