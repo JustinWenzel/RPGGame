@@ -5,6 +5,7 @@ import players.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ItemManager {
@@ -74,12 +75,12 @@ public class ItemManager {
         allItems.addAll(magicWeapons);
     }
 
-    public Item getRandomWeapon(Player player1) {
-        String weaponChoice = player1.getChosenHero().getName();
+    public Item getRandomWeapon(Player player) {
+        String weaponChoice = player.getChosenHero().getName();
 
         switch (weaponChoice) {
             case "Knight":
-                for (Item owned : player1.getBackpack()) {
+                for (Item owned : player.getBackpack()) {
                     for (Item close : closeWeapons) {
                         if (owned.getName().equals(close.getName())) {
                             return owned;
@@ -90,7 +91,7 @@ public class ItemManager {
                 return closeWeapons.get(randomIndexKnight);
 
             case "MagicUser":
-                for (Item owned : player1.getBackpack()) {
+                for (Item owned : player.getBackpack()) {
                     for (Item magic : magicWeapons) {
                         if (owned.getName().equals(magic.getName())) {
                             return owned;
@@ -106,5 +107,33 @@ public class ItemManager {
                 return closeWeapons.get(randomIndexDefault);
         }
     }
+
+    public Item getRandomHealthItem(){
+        int randomIndexHealth = ThreadLocalRandom.current().nextInt(healingItems.size());
+        return healingItems.get(randomIndexHealth);
+    }
+
+    public Item chooseItemReward(Scanner scanner, Player player) {
+        System.out.println("Choose an Item: 1) Random new weapon \n2) Random health item");
+        int chosenItem = scanner.nextInt();
+
+        Item reward;
+        switch (chosenItem) {
+            case 1:
+                reward = getRandomWeapon(player);
+                break;
+            case 2:
+                reward = getRandomHealthItem();
+                break;
+            default:
+                System.out.println("Invalid choice. Defaulting to health item.");
+                reward = getRandomHealthItem();
+                break;
+        }
+
+        System.out.println("You received: " + reward);
+        return reward;
+    }
+
 
 }
